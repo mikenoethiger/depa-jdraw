@@ -64,8 +64,7 @@ public class StdDrawModel implements DrawModel {
 
 	@Override
 	public void removeModelChangeListener(DrawModelListener listener) {
-		// TODO to be implemented  
-		System.out.println("StdDrawModel.removeModelChangeListener has to be implemented");
+		listeners.remove(listener);
 	}
 
 	/** The draw command handler. Initialized here with a dummy implementation. */
