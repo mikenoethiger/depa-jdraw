@@ -9,9 +9,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import jdraw.framework.Figure;
+import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
 
@@ -23,6 +27,8 @@ import jdraw.framework.FigureListener;
  */
 public class Rect implements Figure {
 	private static final long serialVersionUID = 9120181044386552132L;
+
+	private final Set<FigureListener> figureListeners = new CopyOnWriteArraySet<>();
 
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
@@ -54,14 +60,20 @@ public class Rect implements Figure {
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
-		rectangle.setFrameFromDiagonal(origin, corner);
-		// TODO notification of change
+		Rectangle rect = new Rectangle();
+		rect.setFrameFromDiagonal(origin, corner);
+
+		if (!rect.equals(rectangle)) {
+			rectangle.setFrameFromDiagonal(origin, corner);
+			notifyListeners(new FigureEvent(this));
+		}
 	}
 
 	@Override
 	public void move(int dx, int dy) {
+		if (dx == 0 && dy == 0) return;
 		rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
-		// TODO notification of change
+		notifyListeners(new FigureEvent(this));
 	}
 
 	@Override
@@ -86,12 +98,18 @@ public class Rect implements Figure {
 
 	@Override
 	public void addFigureListener(FigureListener listener) {
-		// TODO Auto-generated method stub
+		figureListeners.add(listener);
 	}
 
 	@Override
 	public void removeFigureListener(FigureListener listener) {
-		// TODO Auto-generated method stub
+		figureListeners.remove(listener);
+	}
+
+	private void notifyListeners(FigureEvent e) {
+		for (FigureListener fl : figureListeners) {
+			fl.figureChanged(e);
+		}
 	}
 
 	@Override
