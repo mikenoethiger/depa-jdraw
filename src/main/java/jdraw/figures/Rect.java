@@ -5,14 +5,12 @@
 
 package jdraw.figures;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.List;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
+import jdraw.std.AwtFigure;
 import jdraw.std.StdFigure;
 
 /**
@@ -21,7 +19,7 @@ import jdraw.std.StdFigure;
  * @author Christoph Denzler
  *
  */
-public class Rect extends StdFigure {
+public class Rect extends AwtFigure {
 	private static final long serialVersionUID = 9120181044386552132L;
 
 	/**
@@ -70,16 +68,6 @@ public class Rect extends StdFigure {
 		notifyListeners();
 	}
 
-	@Override
-	public boolean contains(int x, int y) {
-		return rectangle.contains(x, y);
-	}
-
-	@Override
-	public Rectangle getBounds() {
-		return rectangle.getBounds();
-	}
-
 	/**
 	 * Returns a list of 8 handles for this Rectangle.
 	 * @return all handles that are attached to the targeted figure.
@@ -95,4 +83,8 @@ public class Rect extends StdFigure {
 		return null;
 	}
 
+	@Override
+	protected Shape getShape() {
+		return rectangle;
+	}
 }

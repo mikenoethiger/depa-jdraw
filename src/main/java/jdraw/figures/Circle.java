@@ -2,32 +2,32 @@ package jdraw.figures;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
-import jdraw.std.StdFigure;
+import jdraw.std.AwtFigure;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
-public class Circle extends StdFigure {
+public class Circle extends AwtFigure {
 
     /**
-     * Use the java.awt.Rectangle in order to save/reuse code.
+     * Use the java.awt.geom.Ellipse2D in order to save/reuse code.
      */
     private final Ellipse2D circle;
 
     /**
-     * Create a new rectangle of the given dimension.
-     * @param x the x-coordinate of the upper left corner of the rectangle
-     * @param y the y-coordinate of the upper left corner of the rectangle
-     * @param w the rectangle's width
-     * @param h the rectangle's height
+     * Create a new cricle of the given dimension.
+     * @param x the x-coordinate of the upper left corner of the cricle
+     * @param y the y-coordinate of the upper left corner of the cricle
+     * @param w the cricle's width
+     * @param h the cricle's height
      */
     public Circle(int x, int y, int w, int h) {
         circle = new Ellipse2D.Double(x, y, w, h);
     }
 
     /**
-     * Draw the rectangle to the given graphics context.
+     * Draw the cricle to the given graphics context.
      * @param g the graphics context to use for drawing.
      */
     @Override
@@ -56,18 +56,8 @@ public class Circle extends StdFigure {
         notifyListeners();
     }
 
-    @Override
-    public boolean contains(int x, int y) {
-        return circle.contains(x, y);
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return circle.getBounds();
-    }
-
     /**
-     * Returns a list of 8 handles for this Rectangle.
+     * Returns a list of 8 handles for this cricle.
      * @return all handles that are attached to the targeted figure.
      * @see jdraw.framework.Figure#getHandles()
      */
@@ -80,5 +70,10 @@ public class Circle extends StdFigure {
     @Override
     public Figure clone() {
         return null;
+    }
+
+    @Override
+    protected Shape getShape() {
+        return circle;
     }
 }

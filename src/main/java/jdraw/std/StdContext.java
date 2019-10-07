@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jdraw.figures.CircleTool;
+import jdraw.figures.LineTool;
 import jdraw.figures.RectTool;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
@@ -168,8 +169,10 @@ public class StdContext extends AbstractContext {
 		// TODO Add new figure tools here
 		DrawTool rectangleTool = new RectTool(this);
 		DrawTool circleTool = new CircleTool(this);
+		DrawTool lineTool = new LineTool(this);
 		addTool(rectangleTool);
 		addTool(circleTool);
+		addTool(lineTool);
 	}
 
 	/**
