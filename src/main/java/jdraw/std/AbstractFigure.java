@@ -7,23 +7,24 @@ import jdraw.framework.FigureListener;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-public abstract class StdFigure implements Figure {
+public abstract class AbstractFigure implements Figure {
 
     private final Set<FigureListener> figureListeners = new CopyOnWriteArraySet<>();
+    private final FigureEvent figureEvent = new FigureEvent(this);
 
     @Override
-    public void addFigureListener(FigureListener listener) {
+    public final void addFigureListener(FigureListener listener) {
         figureListeners.add(listener);
     }
 
     @Override
-    public void removeFigureListener(FigureListener listener) {
+    public final void removeFigureListener(FigureListener listener) {
         figureListeners.remove(listener);
     }
 
-    protected void notifyListeners() {
+    protected final void notifyListeners() {
         for (FigureListener fl : figureListeners) {
-            fl.figureChanged(new FigureEvent(this));
+            fl.figureChanged(figureEvent);
         }
     }
 

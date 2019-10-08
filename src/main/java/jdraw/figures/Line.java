@@ -2,13 +2,13 @@ package jdraw.figures;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
-import jdraw.std.AwtFigure;
+import jdraw.std.AbstractShapeFigure;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.List;
 
-public class Line extends AwtFigure {
+public class Line extends AbstractShapeFigure {
 
     /**
      * Use the java.awt.geom.Line2D in order to save/reuse code.
@@ -72,5 +72,11 @@ public class Line extends AwtFigure {
     @Override
     protected Shape getShape() {
         return line;
+    }
+
+    @Override
+    public boolean contains(int x, int y) {
+        double sqDistance = line.ptLineDistSq(line.getX1(), line.getY1(), line.getX2(), line.getY2(), x, y);
+        return sqDistance < 100;
     }
 }

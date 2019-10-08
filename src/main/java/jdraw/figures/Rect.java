@@ -10,8 +10,7 @@ import java.util.List;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
-import jdraw.std.AwtFigure;
-import jdraw.std.StdFigure;
+import jdraw.std.AbstractShapeFigure;
 
 /**
  * Represents rectangles in JDraw.
@@ -19,7 +18,7 @@ import jdraw.std.StdFigure;
  * @author Christoph Denzler
  *
  */
-public class Rect extends AwtFigure {
+public class Rect extends AbstractShapeFigure {
 	private static final long serialVersionUID = 9120181044386552132L;
 
 	/**

@@ -1,14 +1,13 @@
 package jdraw.figures;
 
-import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
-import jdraw.std.AwtFigure;
+import jdraw.std.AbstractShapeFigure;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
-public class Circle extends AwtFigure {
+public class Circle extends AbstractShapeFigure {
 
     /**
      * Use the java.awt.geom.Ellipse2D in order to save/reuse code.
@@ -49,13 +48,6 @@ public class Circle extends AwtFigure {
         }
     }
 
-    @Override
-    public void move(int dx, int dy) {
-        if (dx == 0 && dy == 0) return;
-        circle.setFrame(circle.getX()+dx, circle.getY()+dy, circle.getWidth(), circle.getHeight());
-        notifyListeners();
-    }
-
     /**
      * Returns a list of 8 handles for this cricle.
      * @return all handles that are attached to the targeted figure.
@@ -63,12 +55,6 @@ public class Circle extends AwtFigure {
      */
     @Override
     public List<FigureHandle> getHandles() {
-        return null;
-    }
-
-
-    @Override
-    public Figure clone() {
         return null;
     }
 

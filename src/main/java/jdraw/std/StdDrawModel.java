@@ -27,18 +27,16 @@ public class StdDrawModel implements DrawModel {
 	@Override
 	public void addFigure(Figure f) {
 		if (figures.contains(f)) return;
-		boolean added = figures.add(f);
-		if (added) {
-			DrawModelEvent e1 = new DrawModelEvent(this, f, DrawModelEvent.Type.FIGURE_ADDED);
-			notifyListeners(e1);
+		figures.add(f);
+		DrawModelEvent e1 = new DrawModelEvent(this, f, DrawModelEvent.Type.FIGURE_ADDED);
+		notifyListeners(e1);
 
-			FigureListener figureListener = figureEvent -> {
-				DrawModelEvent e2 = new DrawModelEvent(this, figureEvent.getFigure(), DrawModelEvent.Type.FIGURE_CHANGED);
-				notifyListeners(e2);
-			};
-			f.addFigureListener(figureListener);
-			figureListeners.put(f, figureListener);
-		}
+		FigureListener figureListener = figureEvent -> {
+			DrawModelEvent e2 = new DrawModelEvent(this, figureEvent.getFigure(), DrawModelEvent.Type.FIGURE_CHANGED);
+			notifyListeners(e2);
+		};
+		f.addFigureListener(figureListener);
+		figureListeners.put(f, figureListener);
 	}
 
 	@Override
@@ -83,7 +81,9 @@ public class StdDrawModel implements DrawModel {
 	@Override
 	public void setFigureIndex(Figure f, int index) {
 		if (index < 0 || index >= figures.size()) throw new IndexOutOfBoundsException(String.format("given index %s out of range 0..%s", index, figures.size()));
-		if (figures.indexOf(f) < 0) throw new IllegalArgumentException();
+		int currentIndex = figures.indexOf(f);
+		if (currentIndex < 0) throw new IllegalArgumentException();
+		if (currentIndex == index) return;
 
 		figures.remove(f);
 		figures.add(index, f);
@@ -93,11 +93,11 @@ public class StdDrawModel implements DrawModel {
 
 	@Override
 	public void removeAllFigures() {
-		figures.clear();
-		Set<Map.Entry<Figure, FigureListener>> listeners = figureListeners.entrySet();
-		for (Map.Entry<Figure, FigureListener> e : listeners) {
-			e.getKey().removeFigureListener(e.getValue());
+		if (figures.size() == 0) return;
+		for (Figure f : figures) {
+			f.removeFigureListener(figureListeners.get(f));
 		}
+		figures.clear();
 		figureListeners.clear();
 		notifyListeners(new DrawModelEvent(this, null, DrawModelEvent.Type.DRAWING_CLEARED));
 	}
