@@ -1,10 +1,15 @@
 package jdraw.figures;
 
 import jdraw.framework.FigureHandle;
+import jdraw.handles.EastHandle;
+import jdraw.handles.NorthHandle;
+import jdraw.handles.SouthHandle;
+import jdraw.handles.WestHandle;
 import jdraw.std.AbstractShapeFigure;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Circle extends AbstractShapeFigure {
@@ -49,13 +54,18 @@ public class Circle extends AbstractShapeFigure {
     }
 
     /**
-     * Returns a list of 8 handles for this cricle.
+     * Returns a list of 4 handles for this cricle.
      * @return all handles that are attached to the targeted figure.
      * @see jdraw.framework.Figure#getHandles()
      */
     @Override
     public List<FigureHandle> getHandles() {
-        return null;
+        List<FigureHandle> handles = new ArrayList<>();
+        handles.add(new NorthHandle(this));
+        handles.add(new WestHandle(this));
+        handles.add(new SouthHandle(this));
+        handles.add(new EastHandle(this));
+        return handles;
     }
 
     @Override

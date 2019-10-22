@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
+import java.util.List;
 
+import jdraw.framework.FigureHandle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,6 +78,14 @@ public class RectangleTest {
 		assertEquals(f1.getBounds().getLocation(), f2.getBounds().getLocation(), "Position of the two figures must be equal");
 		assertEquals(20, f1.getBounds().x, "Figures must both be at position x=20");
 		assertEquals(20, f1.getBounds().y, "Figures must both be at position y=20");
+	}
+
+	@Test
+	final public void testHandles() {
+		List<FigureHandle> handles = f.getHandles();
+		for (FigureHandle handle : handles) {
+			assertEquals(f, handle.getOwner());
+		}
 	}
 
 	class TestListener implements FigureListener {

@@ -2,10 +2,15 @@ package jdraw.figures;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
+import jdraw.handles.LineHandle1;
+import jdraw.handles.LineHandle2;
+import jdraw.handles.NorthEastHandle;
+import jdraw.handles.SouthWestHandle;
 import jdraw.std.AbstractShapeFigure;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Line extends AbstractShapeFigure {
@@ -60,7 +65,10 @@ public class Line extends AbstractShapeFigure {
      */
     @Override
     public List<FigureHandle> getHandles() {
-        return null;
+        List<FigureHandle> handles = new ArrayList<>();
+        handles.add(new LineHandle1(this));
+        handles.add(new LineHandle2(this));
+        return handles;
     }
 
 
@@ -78,5 +86,13 @@ public class Line extends AbstractShapeFigure {
     public boolean contains(int x, int y) {
         double sqDistance = line.ptLineDistSq(line.getX1(), line.getY1(), line.getX2(), line.getY2(), x, y);
         return sqDistance < 100;
+    }
+
+    public Point getP1() {
+        return new Point((int) line.getX1(), (int) line.getY1());
+    }
+
+    public Point getP2() {
+        return new Point((int) line.getX2(), (int) line.getY2());
     }
 }

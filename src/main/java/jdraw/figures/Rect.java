@@ -6,10 +6,12 @@
 package jdraw.figures;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
+import jdraw.handles.*;
 import jdraw.std.AbstractShapeFigure;
 
 /**
@@ -74,7 +76,16 @@ public class Rect extends AbstractShapeFigure {
 	 */	
 	@Override
 	public List<FigureHandle> getHandles() {
-		return null;
+		List<FigureHandle> handles = new ArrayList<>();
+		handles.add(new NorthHandle(this));
+		handles.add(new EastHandle(this));
+		handles.add(new SouthHandle(this));
+		handles.add(new WestHandle(this));
+		handles.add(new NorthEastHandle(this));
+		handles.add(new NorthWestHandle(this));
+		handles.add(new SouthEastHandle(this));
+		handles.add(new SouthWestHandle(this));
+		return handles;
 	}
 
 	@Override
