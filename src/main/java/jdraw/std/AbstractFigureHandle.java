@@ -10,10 +10,11 @@ import java.awt.event.MouseEvent;
 public abstract class AbstractFigureHandle implements FigureHandle {
 
     private static final Cursor CURSOR = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-
+    // XXX ok, damit umgehen Sie das Problem, dass für jeden Handle unterschiedliche Cursor angezeigt werden sollten.
+    
     private final Figure owner;
     private Point corner;
-    private String status;
+    private String status; // XXX dieses Feld wird nicht verwendet.
 
     public AbstractFigureHandle(Figure owner) {
         this.owner = owner;
@@ -52,7 +53,9 @@ public abstract class AbstractFigureHandle implements FigureHandle {
 
     @Override
     public void dragInteraction(int x, int y, MouseEvent e, DrawView v) {
-        if (e.getButton() != MouseEvent.BUTTON1) return;
+//        if (e.getButton() != MouseEvent.BUTTON1) return;
+        // XXX bei mir fÜhrt obiger Test dazu, dass die Figur NICHT verschoben werden kann,
+    	//     denn e.getButton() gibt 0 zurück.
         getOwner().setBounds(moveOwnerOrigin(x,y), corner);
         v.getContext().showStatusText("w: " + getOwner().getBounds().width + "h: " + getOwner().getBounds().height);
     }

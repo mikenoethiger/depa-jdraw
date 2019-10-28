@@ -17,6 +17,8 @@ public class CircleTool extends AbstractShapeDrawTool {
 
     @Override
     public String getName() {
+    	// XXX wenn die Methode jeweils immer nur eine Konstante zurück gibt, dann könnte dieser WErt auch mit dem Konstruktor
+    	//     der Basisklasse übergeben werden. Mit Ihrem Ansatz haben SIe nun die Möglichkeit, den Namen dynamisch anzupassen.
         return "Circle";
     }
 

@@ -26,6 +26,11 @@ public class LineHandle1 extends AbstractFigureHandle {
         return castOwner().getP1();
     }
 
+    // XXX Sie könnten als Variante auch die Methode getOwner überschreiben 
+	//	    @Override
+	//	    public Line getOwner() {
+	//	    	return (Line)super.getOwner();
+	//	    }
     private Line castOwner() {
         return (Line) getOwner();
     }

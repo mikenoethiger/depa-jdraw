@@ -25,6 +25,7 @@ public class NorthHandle extends AbstractFigureHandle {
 
     @Override
     protected Point getOwnerCorner() {
+    	// XXX ist das nicht bottomright()?
         Rectangle r = getOwner().getBounds();
         return new Point(r.x+r.width, r.y+r.height);
     }

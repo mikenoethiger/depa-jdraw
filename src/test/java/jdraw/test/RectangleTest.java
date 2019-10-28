@@ -81,6 +81,8 @@ public class RectangleTest {
 	}
 
 	@Test
+	// XXX sehr gut, dass Sie da auch einen ersten Handle-Test bereitstellen, der wird ihnen später noch 
+	//     helfen (insbesondere wenn wir Dekoratorein implementieren).
 	final public void testHandles() {
 		List<FigureHandle> handles = f.getHandles();
 		for (FigureHandle handle : handles) {

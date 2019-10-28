@@ -25,6 +25,7 @@ public class SouthHandle extends AbstractFigureHandle {
 
     @Override
     protected Point getOwnerCorner() {
+    	// XXX hier könnte man topLeft() hinschreiben.
         return getOwner().getBounds().getLocation();
     }
 }

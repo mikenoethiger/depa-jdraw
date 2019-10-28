@@ -1,4 +1,5 @@
 package jdraw.std;
+// XXX man kann sich fragen ob diese Klasse in dieses Paket gehört, und nicht doch eher zu den Figuren, also in das Paket jdraw.figures.
 
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
